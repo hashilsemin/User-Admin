@@ -1,0 +1,27 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <form action="/admin/login" method="POST">
+                
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                   {{#if errorMail}}<small id="emailHelp" style="color: red;">Email doesn't exist</small>{{/if}}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+                       {{#if errorPass}}<small id="emailHelp" style="color: red;">Your password is wrong</small>{{/if}}
+                </div>
+               
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>
+<style>
+    section{
+      margin-left: 40%;
+      margin-top: 5%;
+    }
+</style>
