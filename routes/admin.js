@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const adminHelpers = require('../helpers/admin-helpers')
 const verifyAdminLogin = (req,res,next)=>{
+  res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 let admin = req.session.admin
   if(admin){
     next()
@@ -12,7 +14,12 @@ let admin = req.session.admin
 router.get('/', function(req, res, next) {
   res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   if(req.session.adminLoggedIn){
-    res.render('admin/adminHome',{adminHbs:true})
+    return new Promise(async(resolve,reject)=>{
+      let Alluser = await adminHelpers.getUser()
+console.log(Alluser);
+    res.render('admin/adminHome',{adminNav:true,Alluser})
+    })
+
   }else{
     console.log("hi");
     res.redirect('/admin/login')
@@ -39,6 +46,61 @@ router.get('/logout',function(req,res){
   req.session.destroy()
   res.redirect('/admin/login')
 })
+
+router.get('/deleteUser/:id',(req,res)=>{
+  let userId=req.params.id
+  console.log(userId);
+  adminHelpers.deleteUser(userId).then(()=>{
+    res.redirect('/admin')
+  })
+
+})
+
+router.get('/editUser/:id',verifyAdminLogin,async(req,res)=>{
+  let userId=req.params.id
+  console.log(userId);
+  let userData= await adminHelpers.getUserforEdit(userId)
+  console.log(userData);
+  console.log("mjjjj");
+  res.render('admin/editPage',{userData,adminNav:true})
+})
+
+router.get('/addUser',verifyAdminLogin,async(req,res)=>{
+
+  res.render('admin/addUser',{adminNav:true,'error':  req.session.userExistforadmin})
+})
+
+router.post('/addUser',async(req,res)=>{ 
+  
+  let status = await adminHelpers.checkUser(req.body)
+console.log(status); 
+if(status){
+  req.session.userExistforadmin=true
+  res.redirect('/admin/addUser')
+}else{
+  adminHelpers.addUser(req.body).then(()=>{
+    res.redirect('/admin')
+  })
+
+}
+  
+
+
+})
+
+
+router.post('/editUser/:id',async(req,res)=>{
+
+let userId= req.params.id
+console.log(userId);
+adminHelpers.editUser(userId,req.body).then(()=>{
+  
+  res.redirect('/admin')
+})
+
+})
+
+
 
 
 router.post('/login',function(req,res){

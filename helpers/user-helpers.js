@@ -18,10 +18,11 @@ signupUser:(userData)=>{
 doLogin:(userData)=>{
     return new Promise(async(resolve,reject)=>{
         console.log(userData);
+        console.log(userData);
         let status =false
         let response = {}
         let userContent = await db.get().collection(collection.USER_COLLECTION).findOne({email:userData.email})
-        console.log("qqqqqqqqq"+userContent);
+        console.log(userContent);
         if(userContent){
             bcrypt.compare(userData.password, userContent.password).then((status)=>{
                 if(status){

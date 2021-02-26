@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 var db = require('./config/connection')
 db.connect((err)=>{
   if(err){
@@ -30,6 +31,7 @@ app.use(session({
   secret: 'keyboard cat',
   cookie: { maxAge:600000 }
 }))
+
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
 

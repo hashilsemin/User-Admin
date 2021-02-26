@@ -1,0 +1,38 @@
+<section>
+  
+    <div class="container">
+        <div class="row ">
+            <div class="welcome col-md-6 col-12 mt-5">
+                  <h1 style="font-family: 'Ubuntu', sans-serif;">WELCOME {{user.name}} from {{user.country}}</h1>
+        
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<style>
+    body{
+
+        background: #74ebd5;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    }
+
+      .welcome {
+        padding: 3em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background-color: rgba(224, 138, 24, 0.459);
+    }
+
+</style>

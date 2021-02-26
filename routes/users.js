@@ -1,5 +1,6 @@
 var express = require('express');
 const { Db } = require('mongodb');
+const adminHelpers = require('../helpers/admin-helpers');
 var router = express.Router();
 const verifyUserLogin=(req,res,next)=>{
   let user=req.session.user
@@ -19,7 +20,7 @@ router.get('/',verifyUserLogin, function(req, res, next) {
   let user = req.session.user
 
   if(user){
-    res.render('user/userHome')
+    res.render('user/userHome',{userNav:true,user})
   }else{
     res.redirect('/')
   }
@@ -35,11 +36,17 @@ if(user){
   res.render('user/userLogin',{'error':req.session.userLoginErr})
 })
 
-router.get('/signup',function(req,res){
-  res.render('user/userSignup')
+router.get('/signup', function(req,res){
+  if(req.session.user){
+    res.redirect('/')
+  }else{
+    res.render('user/userSignup',{'error': req.session.userExist})
+    req.session.userExist=false
+  }
+ 
 })
 
-router.get('/logout',function(req,res){
+router.get('/logout',function(req,res){ 
   req.session.destroy()
   res.redirect('/login')
 })
@@ -59,7 +66,15 @@ if(response.status){
 })
 })
 
-router.post('/signup',function(req,res){
+router.post('/signup',async(req,res)=>{
+let status = await adminHelpers.checkUser(req.body)
+console.log(status); 
+if(status){
+  req.session.userExist=true
+  res.redirect('/signup')
+}else{
+
+
 
  userHelpers.signupUser(req.body).then((data)=>{
    console.log(data);
@@ -69,7 +84,7 @@ router.post('/signup',function(req,res){
   res.redirect('/')
  })
 
-
+}
 })
 
 module.exports = router;

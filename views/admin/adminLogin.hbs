@@ -1,8 +1,9 @@
 <section>
     <div class="container">
         <div class="row">
-            <form action="/admin/login" method="POST">
-                
+             <div class="adminlogin col-md-6 col-12">
+            <form action="/admin/login" method="POST" id="adminLogin">
+                <h1 style="font-family: 'Ubuntu', sans-serif;">Log In</h1>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -14,8 +15,9 @@
                        {{#if errorPass}}<small id="emailHelp" style="color: red;">Your password is wrong</small>{{/if}}
                 </div>
                
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Log in</button>
             </form>
+            </div>  
         </div>
     </div>
 </section>
@@ -24,4 +26,26 @@
       margin-left: 40%;
       margin-top: 5%;
     }
+      body{
+background: #FF5F6D;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #FFC371, #FF5F6D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    }
+
+    .adminlogin {
+        padding: 3em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background-color: rgba(168, 168, 168, 0.459);
+    }
 </style>
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>

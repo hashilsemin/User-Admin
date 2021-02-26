@@ -1,10 +1,11 @@
 <section>
     <div class="container">
         <div class="row">
-            <form action="/login" method="POST">
-                
+            <div class="userlogin col-md-6 col-12">
+            <form action="/login" id="login" method="POST">
+                 <h1 style="font-family: 'Ubuntu', sans-serif;">User Login</h1>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
+                    <label>Email address</label>
                     <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                    {{#if error}}<small id="emailHelp" style="color: red;">Wrong password or email</small>{{/if}}
                 </div>
@@ -13,10 +14,12 @@
                     <input type="password" class="form-control" name="password" id="exampleInputPassword1">
                        {{#if errorPass}}<small id="emailHelp" style="color: red;">Your password is wrong</small>{{/if}}
                 </div>
-                <a href="/signup">Signup</a>
-               
-                <button type="submit" class="btn btn-primary">Submit</button>
+             
+                <a href="/signup">Create a new account?</a>
+                <button type="submit" class="btn float-right btn-primary">Log In</button>
+                  
             </form>
+            </div>
         </div>
     </div>
 </section>
@@ -24,5 +27,28 @@
     section{
       margin-left: 40%;
       margin-top: 5%;
+    
+    }
+    body{
+background: #D3CCE3;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    }
+
+    .userlogin {
+        padding: 3em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background-color: rgba(168, 168, 168, 0.459);
     }
 </style>
+
+  
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>

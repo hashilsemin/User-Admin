@@ -1,0 +1,69 @@
+<section>
+  
+    <div class="container">
+        <div class="row">
+            <div class="add mt-5">
+                  <h1 style="font-family: 'Ubuntu', sans-serif;">Add User</h1>
+            <form action="/admin/addUser" method="POST" id="addUser">
+                
+                <div class="form-group">
+
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    {{#if error}}<b style="color: red;">Email already exists</b>{{/if}}
+                </div>
+                 <div class="form-group">
+                    
+                    <label for="exampleInputEmail1">Full name</label>
+                    <input type="text" name="name" class="form-control" >
+            
+                </div>
+                 <div class="form-group">
+                    
+                    <label for="exampleInputEmail1">Mobile number</label>
+                    <input type="text" name="mobile" class="form-control" >
+            
+                </div>
+                 <div class="form-group">
+                    
+                    <label for="exampleInputEmail1">Country</label>
+                    <input type="text" name="country" class="form-control" >
+            
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" name="password">
+                      
+                </div>
+               
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    section{
+      margin-left: 40%;
+      margin-top: 5%;
+      
+    }
+body{
+    background: #FFEFBA;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+ .add {
+        padding: 2em;
+        position: absolute;
+        left: 50%;
+        top: 60%;
+        
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background-color: rgba(168, 168, 168, 0.459);
+    }
+
+</style>
