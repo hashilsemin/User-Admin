@@ -33,7 +33,9 @@ if(user){
   res.redirect('/')
 }
 
-  res.render('user/userLogin',{'error':req.session.userLoginErr})
+  res.render('user/userLogin',{'error':req.session.userLoginErr,'errorPass':req.session.userLoginPassErr})
+  req.session.userLoginPassErr=false
+  req.session.userLoginErr=false
 })
 
 router.get('/signup', function(req,res){
@@ -55,15 +57,27 @@ router.get('/logout',function(req,res){
 router.post('/login',function(req,res){
 console.log(req.body);
 userHelpers.doLogin(req.body).then((response)=>{
+  console.log(response);
+  console.log("jajjajajajajaj");
+  
 if(response.status){
   req.session.user=response.user
   req.session.userLoggedIn=true
   res.redirect('/')
-}else{
+}
+else if(response.response.errPass){
+  console.log("mwonaaaaaaaaaaaaa");
+  req.session.userLoginPassErr=true
+  res.redirect('/login')
+ 
+}
+
+else {
   req.session.userLoginErr=true
   res.redirect('/login')
 }
 })
+
 })
 
 router.post('/signup',async(req,res)=>{

@@ -28,13 +28,16 @@ doLogin:(userData)=>{
                 if(status){
                     response.user= userContent,
                     response.status= true
+                    console.log("outtttttt");
                     resolve(response)   
                 }else{
-                    resolve({status:false})
+                    response.errPass=true
+                    resolve({status:false, response})
                 }
             })
         }else{
-            resolve({ status: false })
+            response.errEmail=true
+            resolve({ status: false,response })
         }
     })
 }
